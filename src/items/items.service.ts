@@ -4,8 +4,12 @@ import { Item } from './item.model';
 @Injectable()
 export class ItemsService {
   private items: Item[] = [];
-  find(): string {
-    return 'This action returns all items';
+  findAll(): Item[] {
+    return this.items;
+  }
+
+  findById(id: string): Item {
+    return this.items.find((item) => item.id === id);
   }
 
   create(item: Item): Item {

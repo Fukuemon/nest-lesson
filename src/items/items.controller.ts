@@ -1,7 +1,7 @@
 import { ItemStatus } from './item-status.enum';
 import { Item } from './item.model';
 import { ItemsService } from './items.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('items')
 export class ItemsController {
@@ -10,8 +10,13 @@ export class ItemsController {
   // ここにリクエストハンドラを書く
   // 例: GETリクエストのハンドラ
   @Get()
-  findAll(): string {
-    return this.itemsService.find(); // ItemsServiceのfindメソッドを呼び出す
+  findAll(): Item[] {
+    return this.itemsService.findAll(); // ItemsServiceのfindメソッドを呼び出す
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string): Item {
+    return this.itemsService.findById(id);
   }
 
   @Post()
