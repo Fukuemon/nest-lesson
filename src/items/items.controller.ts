@@ -1,5 +1,7 @@
+import { ItemStatus } from './item-status.enum';
+import { Item } from './item.model';
 import { ItemsService } from './items.service';
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 @Controller('items')
 export class ItemsController {
@@ -10,5 +12,22 @@ export class ItemsController {
   @Get()
   findAll(): string {
     return this.itemsService.find(); // ItemsServiceのfindメソッドを呼び出す
+  }
+
+  @Post()
+  create(
+    @Body('id') id: string,
+    @Body('name') name: string,
+    @Body('description') description: string,
+    @Body('price') price: number,
+  ): Item {
+    const item: Item = {
+      id,
+      name,
+      description,
+      price,
+      status: ItemStatus.ON_SALE,
+    };
+    return this.itemsService.create(item);
   }
 }
