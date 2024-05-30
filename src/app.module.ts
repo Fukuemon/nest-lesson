@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsControllerTsController } from './controller/cats.controller.ts/cats.controller.ts.controller';
+import { ItemsModule } from './items/items.module';
 
+// ルートモジュール
 @Module({
-  imports: [],
-  controllers: [AppController, CatsControllerTsController],
+  imports: [ItemsModule], // 他のモジュールをインポートする
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
