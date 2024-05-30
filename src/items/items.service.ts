@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Item } from './item.model';
+import { ItemStatus } from './item-status.enum';
 
 @Injectable()
 export class ItemsService {
@@ -23,4 +24,7 @@ export class ItemsService {
     return item;
   }
 
+  delete(id: string): void {
+    this.items = this.items.filter((item) => item.id !== id); // idが一致するアイテムを削除
+  }
 }
